@@ -6,7 +6,7 @@ import re
 from dotenv import load_dotenv
 load_dotenv()
 
-openai.api_key = os.getenv('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')
+openai.api_key = os.getenv('openAI key')
 
 def generate_response(prompt):
     response = openai.Completion.create(
