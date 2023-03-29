@@ -1,3 +1,7 @@
+# Description: A simple chatbot using NLTK 
+# pip install nltk
+
+
 import nltk
 import random
 from nltk.chat.util import Chat, reflections
