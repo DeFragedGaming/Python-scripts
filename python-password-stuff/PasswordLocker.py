@@ -1,5 +1,5 @@
 # Description: This program will store a password in an encrypted file. 
-# There is also a decryption program that will decrypt the password and print it to the screen. PasswordLocker.py 
+# There is also a decryption program that will decrypt the password and print it to the screen. Password_Decrypt.py 
 # Please install the cryptography and Fernet modules before running this program.
 # pip install cryptography
 # pip install Fernet
