@@ -57,4 +57,4 @@ else:
     print_error("No hosts found. Exiting...")
 
 
-subprocess.call(["killall", "msfconsole"])
+subprocess.call(["killall", "msfconsole"])                  
